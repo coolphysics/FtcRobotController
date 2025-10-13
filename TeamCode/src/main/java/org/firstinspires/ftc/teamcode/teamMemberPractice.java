@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 @TeleOp
-public class teamMemberPractice extends OpMode {
+public class TeamMemberPractice extends OpMode {
 
     boolean initDone:
 
