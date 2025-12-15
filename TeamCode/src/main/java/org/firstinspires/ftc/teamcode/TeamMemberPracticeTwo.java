@@ -12,7 +12,6 @@ public class TeamMemberPracticeTwo extends OpMode {
     public void init() {
         telemetry.addData("init", initDone);
         initDone = true;
-
     }
 
     double squareInputWithSign(double input) {
@@ -33,7 +32,6 @@ public class TeamMemberPracticeTwo extends OpMode {
 
         yAxis = squareInputWithSign(yAxis);
         telemetry.addData("Left stick modified", yAxis);
-
 
     }
 }
