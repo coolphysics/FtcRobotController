@@ -9,7 +9,7 @@ public class TestBenchServo {
     private CRServo servoRot;
 
     public void init(HardwareMap hwMap) {
-        servoPos = hwMap.get(Servo.class, "servo_five_turn");
+        servoPos = hwMap.get(Servo.class, "servo_position");
         //servoRot = hwMap.get(CRServo.class, "servo_rot");
 
     }

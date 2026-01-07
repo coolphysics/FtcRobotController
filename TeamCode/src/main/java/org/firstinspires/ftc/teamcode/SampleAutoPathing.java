@@ -24,15 +24,18 @@ public class SampleAutoPathing extends OpMode {
         //SHOOT > ATTEMPT TO SCORE the ARTIFACT
 
         DRIVE_STARTPOS_SHOOT_POS,
-        SHOOT_PRELOAD
+        SHOOT_PRELOAD,
+        DRIVE_SHOOTPOS_ENDPOS
+
     }
 
     PathState pathState;
 
     private final Pose startPose = new Pose(20, 122, Math.toRadians(138));
     private final Pose shootPose = new Pose(46, 96, Math.toRadians(138));
+    private final Pose endPose = new Pose(63,106, Math.toRadians(90));
 
-    private PathChain driveStartPosShootPos;
+    private PathChain driveStartPosShootPos, driveShootPosEndPos;
 
     public void buildPaths() {
         // put in coordinates for starting pos > ending pos for entire path
@@ -40,6 +43,11 @@ public class SampleAutoPathing extends OpMode {
         driveStartPosShootPos = follower.pathBuilder()
                 .addPath(new BezierLine(startPose, shootPose))
                 .setLinearHeadingInterpolation(startPose.getHeading(),shootPose.getHeading())
+                .build();
+
+        driveShootPosEndPos = follower.pathBuilder()
+                .addPath(new BezierLine(shootPose, endPose))
+                .setLinearHeadingInterpolation(shootPose.getHeading(),endPose.getHeading())
                 .build();
     }
 
@@ -52,13 +60,22 @@ public class SampleAutoPathing extends OpMode {
                 break;
             case SHOOT_PRELOAD:
                 // check if the follower has done its path?
+                // and check that 5 secs have elapsed. Probably not done shooting after path over
                 // not busy, it has finished its path from the previous state
-                if (!follower.isBusy())  {
-                    //TODO add logic to flywheel shooter
-                   telemetry.addLine("Done Path 1");
+                //TODO add logic to fywheel shooter
+                if (!follower.isBusy() && pathTimer.getElapsedTime() > 5)  {
+                   //telemetry.addLine("Done Path 1"); was originally here until added next case
                    //transition to next state
+                    follower.followPath(driveShootPosEndPos, true);
+                    setPathState(PathState.DRIVE_SHOOTPOS_ENDPOS);
                 }
                 break;
+            case DRIVE_SHOOTPOS_ENDPOS:
+                // all done!
+                if (!follower.isBusy()) {
+                    telemetry.addLine("Done all paths");
+                }
+
             default:
                 telemetry.addLine("No State Commanded");
                 break;

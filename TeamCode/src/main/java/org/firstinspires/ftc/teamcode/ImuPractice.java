@@ -12,11 +12,13 @@ public class ImuPractice extends OpMode {
 
     @Override
     public void init() {
+
         bench.init(hardwareMap);
     }
 
     @Override
     public void loop() {
+
         telemetry.addData("heading", bench.getHeading(AngleUnit.DEGREES));
     }
 }

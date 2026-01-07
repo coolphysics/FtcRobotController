@@ -4,13 +4,18 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 
 public class TestBench {
+    private Servo servoPos;
     private DigitalChannel touchSensor;
     private DcMotor motor; //e.g. linearSlideMotor0
     private double ticksPerRev; // revolution
 
     public void init(HardwareMap hwMap) {
+        // Five Turn Servo
+        servoPos = hwMap.get(Servo.class, "sevo_five_turn");
+
         //Touch Sensor
         touchSensor = hwMap.get(DigitalChannel.class, "touch_sensor");
         touchSensor.setMode(DigitalChannel.Mode.INPUT);
@@ -34,9 +39,11 @@ public class TestBench {
 
     //-------------Touch Sensor-----------------------------------------
     public boolean getTouchSensorPressed() {
+
         return !touchSensor.getState();
     }
     public boolean isTouchSensorReleased() {
+
         return touchSensor.getState();
     }
 
@@ -48,5 +55,10 @@ public class TestBench {
     }
     public double getMotorRevs() {
         return motor.getCurrentPosition() / ticksPerRev; // normalizes ticks to revolutions
+    }
+
+    //------------Five Turn Servo________________________________________
+    public void setServoPos(double angle) {
+        servoPos.setPosition(angle);
     }
 }
