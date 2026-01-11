@@ -11,15 +11,12 @@ public class SortaTester extends OpMode {
 
     Sorta sorta = new Sorta();
 
-
-
     @Override
     public void init() {
         sorta.init(hardwareMap);
-        //TODO GET DECODE PATTERN FROM OBELISK USING CAMERA
+        //TODO GET DECODE PATTERN FROM OBELISK USING LIMELIGHT3A CAMERA
 
-        sorta.sortPattern(Sorta.DecodePattern.PURPLE_GREEN_PURPLE);// change pattern to depend on Obelisk
-        sorta.sortPattern(Sorta.DecodePattern.PURPLE_GREEN_PURPLE);
+        // Send DECODE pattern to sorta depend
         sorta.sortPattern(Sorta.DecodePattern.PURPLE_GREEN_PURPLE);
     }
 

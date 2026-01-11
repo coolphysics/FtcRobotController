@@ -9,13 +9,16 @@ public class TestBenchServo {
     private CRServo servoRot;
 
     public void init(HardwareMap hwMap) {
-        servoPos = hwMap.get(Servo.class, "servo_position");
+        servoPos = hwMap.get(Servo.class, "five_turn_servo");
+        //servoPos.scaleRange(0.57, 0.43);
+        //servoPos.setPosition(0.5); // initialize position to 0.5
         //servoRot = hwMap.get(CRServo.class, "servo_rot");
 
     }
 
     public void setServoPos(double angle) {
         servoPos.setPosition(angle);
+
     }
 
     public void setServoRot(double power) {

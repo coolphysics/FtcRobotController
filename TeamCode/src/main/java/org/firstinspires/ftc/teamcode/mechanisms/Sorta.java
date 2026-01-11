@@ -8,20 +8,29 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /*
 Assumptions -- using servo positions of the sorta for mapping the three colored balls,
 The colored balls must be in these set servo positions of the sorta for this code to work
-The .5 servo position must be at the home (ready for shoot) position at the start
+The .5 servo position must be at the home (ready for shoot) position at the start of the match
 
 Iteration 1 = preload
+Place the following balls in these positions for preload
 0.50 - PURPLE_A
-0.57 - GREEN
-0.42 - PURPLE_B
-Iteration 2 = first sprite mark nearest to goal
+0.42 - GREEN
+0.57 - PURPLE_B
+
+Iteration 2 = first spike mark nearest to the goal
+TODO - Make code to pick up balls from spike lines in the order shown below.
+The bot must pick up the balls from the first spike line in the order shown, with the sorta at
+each of those positions during pick up.
 0.57 - PURPLE_A
 0.50 - GREEN
 0.42 - PURPLE_B
-Iteration 3 = second sprite mark nearest to goal
+
+Iteration 3 = second sprite mark nearest to the goal
+TODO - Make code to pick up balls from spike lines in the order shown below.
+The bot must pick up the balls from the second spike line in the order shown, with the sorta at
+each of those positions during pick up.
 0.50 - PURPLE_A
-0.57 - GREEN
-0.42 - PURPLE_B
+0.42 - GREEN
+0.57 - PURPLE_B
 
  */
 public class Sorta {
@@ -91,7 +100,7 @@ public class Sorta {
         for (BallColor color : sequence) {
             moveToBall(color);
             hold(HOLD_TIME);
-            //TODO : FLICK OUT ONE BALL & SHOOT ONE BALL
+            //TODO: FLICK OUT ONE BALL & SHOOT ONE BALL
         }
 
         advanceIteration();
@@ -151,6 +160,7 @@ public class Sorta {
 
     /**
      * Holds position for given seconds.
+     * TODO - Code to flick and shoot the ball
      */
     private void hold(double seconds) {
         timer.reset();
